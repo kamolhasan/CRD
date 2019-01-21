@@ -1,0 +1,10 @@
+package: github.com/kamolhasan/CRD
+import:
+- package: github.com/appscode/kutil
+  subpackages:
+  - apiextensions/v1beta1
+  - tools/clientcmd
+- package: k8s.io/client-go
+  version: v10.0.0
+  subpackages:
+  - kubernetes
