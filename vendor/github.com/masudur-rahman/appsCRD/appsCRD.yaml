@@ -1,0 +1,48 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+
+metadata:
+    name: customdeployments.apps.crd
+spec:
+    group: apps.crd
+    versions:
+    -   name: v1alpha1
+        served: true
+        storage: true
+    scope: Namespaced
+    names:
+        kind: CustomDeployment
+        plural: customdeployments
+        singular: customdeployments
+        shortNames:
+        -   customdeploy
+        -   cdeploy
+        -   cd
+
+---
+
+apiVersion: apps.crd/v1alpha1
+kind: CustomDeployment
+
+metadata:
+    name: my-new-custom-deploy
+    labels:
+        app: appscrd
+spec:
+    replicas: 5
+    selector:
+        matchLabels:
+            app: appscrd
+        template:
+            metadata:
+                name: custom-deploy-pod-template
+                labels:
+                    app: appscrd
+            spec:
+                containers:
+                    -   name: appscodeserver
+                        image: masudjuly02/appscodeserver
+                        imagePullPolicy: IifNotPresent
+                restartPolicy: Alwyas
+
+
